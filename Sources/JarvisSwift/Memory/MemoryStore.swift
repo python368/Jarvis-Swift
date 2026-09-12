@@ -206,6 +206,14 @@ final class MemoryStore: ObservableObject {
     
     static let shared = MemoryStore()
     
+    // MARK: - 存储大小估算
+    
+    var estimatedStorageSize: Int64 {
+        let conversationsData = (try? JSONEncoder().encode(conversations))?.count ?? 0
+        let memoriesData = (try? JSONEncoder().encode(memories))?.count ?? 0
+        return Int64(conversationsData + memoriesData)
+    }
+    
     // MARK: - 导出数据（用于备份/迁移）
     
     func exportData() -> Data? {
