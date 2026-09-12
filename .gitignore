@@ -1,0 +1,38 @@
+# Build artifacts
+.build/
+*.xcodeproj/
+*.xcworkspace/
+.DS_Store
+*.swiftpm/
+
+# Xcode
+*.pbxproj
+project.xcworkspace/
+xcuserdata/
+*.xcscheme
+*.xcschememanagement.plist
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs
+*.log
