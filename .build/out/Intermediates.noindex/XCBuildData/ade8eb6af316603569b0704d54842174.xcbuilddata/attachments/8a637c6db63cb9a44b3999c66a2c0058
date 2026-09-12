@@ -1,0 +1,79 @@
+{
+  "" : {
+    "diagnostics" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisSwift-primary.dia",
+    "emit-module-dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisSwift-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisSwift-primary-emit-module.dia",
+    "pch" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisSwift-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisSwift-primary.swiftdeps"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/ContentView.swift" : {
+    "const-values" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/ContentView.swiftconstvalues",
+    "dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/ContentView.d",
+    "diagnostics" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/ContentView.dia",
+    "index-unit-output-path" : "/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/ContentView.o",
+    "swift-dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/ContentView.swiftdeps",
+    "swiftmodule" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/ContentView~partial.swiftmodule"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/JarvisComposer.swift" : {
+    "const-values" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisComposer.swiftconstvalues",
+    "dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisComposer.d",
+    "diagnostics" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisComposer.dia",
+    "index-unit-output-path" : "/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisComposer.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisComposer.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisComposer.o",
+    "swift-dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisComposer.swiftdeps",
+    "swiftmodule" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisComposer~partial.swiftmodule"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/JarvisSettingsView.swift" : {
+    "const-values" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisSettingsView.swiftconstvalues",
+    "dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisSettingsView.d",
+    "diagnostics" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisSettingsView.dia",
+    "index-unit-output-path" : "/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisSettingsView.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisSettingsView.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisSettingsView.o",
+    "swift-dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisSettingsView.swiftdeps",
+    "swiftmodule" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisSettingsView~partial.swiftmodule"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/JarvisTheme.swift" : {
+    "const-values" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisTheme.swiftconstvalues",
+    "dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisTheme.d",
+    "diagnostics" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisTheme.dia",
+    "index-unit-output-path" : "/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisTheme.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisTheme.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisTheme.o",
+    "swift-dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisTheme.swiftdeps",
+    "swiftmodule" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/JarvisTheme~partial.swiftmodule"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Message.swift" : {
+    "const-values" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/Message.swiftconstvalues",
+    "dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/Message.d",
+    "diagnostics" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/Message.dia",
+    "index-unit-output-path" : "/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/Message.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/Message.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/Message.o",
+    "swift-dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/Message.swiftdeps",
+    "swiftmodule" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/Message~partial.swiftmodule"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/MessageBubble.swift" : {
+    "const-values" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/MessageBubble.swiftconstvalues",
+    "dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/MessageBubble.d",
+    "diagnostics" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/MessageBubble.dia",
+    "index-unit-output-path" : "/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/MessageBubble.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/MessageBubble.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/MessageBubble.o",
+    "swift-dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/MessageBubble.swiftdeps",
+    "swiftmodule" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/MessageBubble~partial.swiftmodule"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/main.swift" : {
+    "const-values" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/main.swiftconstvalues",
+    "dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/main.d",
+    "diagnostics" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/main.dia",
+    "index-unit-output-path" : "/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/main.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/main.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/main.o",
+    "swift-dependencies" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/main.swiftdeps",
+    "swiftmodule" : "/Users/kangning/Desktop/Jarvis swift/.build/out/Intermediates.noindex/JarvisSwift.build/Debug/JarvisSwift-p.build/Objects-normal/arm64/main~partial.swiftmodule"
+  }
+}

@@ -1,0 +1,4 @@
+Target dependency graph (2 targets)
+Target 'AllExcludingTests' in project 'Aggregate'
+➜ Explicit dependency on target 'JarvisSwift-product' in project 'JarvisSwift'
+Target 'JarvisSwift-product' in project 'JarvisSwift' (no dependencies)
