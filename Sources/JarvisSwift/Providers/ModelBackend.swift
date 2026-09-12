@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 /// 统一的模型能力
 enum Capability: String, Codable, CaseIterable {
@@ -83,7 +84,7 @@ struct ToolProperty: Codable, Equatable {
     let type: String
     let description: String?
     let enumValues: [String]?
-    let items: ToolProperty?
+    let items: [ToolProperty]?
     
     enum CodingKeys: String, CodingKey {
         case type, description, items
@@ -232,7 +233,7 @@ final class ProviderManager: ObservableObject {
     }
     
     var selectedProvider: ProviderConfig? {
-        selectedProviderID.flatMap { providers.first { $0.id == $0 } }
+        selectedProviderID.flatMap { id in providers.first { $0.id == id } }
     }
     
     var selectedBackend: ModelBackend? {
@@ -327,6 +328,9 @@ final class ProviderManager: ObservableObject {
     }
     
     private func createDirectoryIfNeeded() {
-        storeURL.deletingLastPathComponent().createDirectoryIfNeeded()
+        let dir = storeURL.deletingLastPathComponent()
+        if !FileManager.default.fileExists(atPath: dir.path) {
+            try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        }
     }
 }

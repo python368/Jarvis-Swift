@@ -192,9 +192,8 @@ final class MemoryStore: ObservableObject {
         }
         return items
     }
-}
-
-// MARK: - 持久化结构
+    
+    // MARK: - 持久化结构（嵌套在类内部）
     
     private struct StoredMemoryData: Codable {
         var conversations: [Conversation]

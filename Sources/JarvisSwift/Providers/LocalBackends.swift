@@ -3,7 +3,7 @@ import Foundation
 /// 本地后端基类
 class LocalBackend: ModelBackend {
     let name: String
-    let providerType: ProviderType
+    var providerType: ProviderType
     let supportedCapabilities: [Capability]
     let config: ProviderConfig
     let session: URLSession
@@ -16,8 +16,19 @@ class LocalBackend: ModelBackend {
         self.supportedCapabilities = [.chat, .streaming]
     }
     
+    /// 将 baseURL 字符串转换为 URL
+    var baseURL: URL? {
+        URL(string: config.baseURL)
+    }
+    
+    /// 构建带路径的 URL
+    private func makeURL(path: String) -> URL? {
+        guard let base = baseURL else { return nil }
+        return base.appendingPathComponent(path)
+    }
+    
     func models() async throws -> [Model] {
-        let url = config.baseURL.appendingPathComponent("models")
+        guard let url = makeURL(path: "models") else { return config.customModels ?? [] }
         var request = URLRequest(url: url)
         let (data, _) = try await session.data(for: request)
         // 尝试解析 OpenAI 兼容格式
@@ -33,7 +44,11 @@ class LocalBackend: ModelBackend {
     }
     
     func chat(messages: [Message], attachments: [Attachment], tools: [Tool]?, options: ChatOptions) async throws -> AsyncThrowingStream<StreamEvent, Error> {
-        let url = config.baseURL.appendingPathComponent("chat/completions")
+        guard let url = makeURL(path: "chat/completions") else {
+            return AsyncThrowingStream { continuation in
+                continuation.finish(throwing: NSError(domain: "LocalBackend", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid base URL"]))
+            }
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -128,7 +143,7 @@ class OllamaBackend: LocalBackend {
     }
     
     override func models() async throws -> [Model] {
-        let url = config.baseURL.appendingPathComponent("api/tags")
+        guard let url = makeURL(path: "api/tags") else { return config.customModels ?? [] }
         var request = URLRequest(url: url)
         let (data, _) = try await session.data(for: request)
         struct OllamaTags: Codable { let models: [OllamaModel] }
@@ -141,7 +156,11 @@ class OllamaBackend: LocalBackend {
     
     override func chat(messages: [Message], attachments: [Attachment], tools: [Tool]?, options: ChatOptions) async throws -> AsyncThrowingStream<StreamEvent, Error> {
         // Ollama 使用 /api/chat 端点
-        let url = config.baseURL.appendingPathComponent("api/chat")
+        guard let url = makeURL(path: "api/chat") else {
+            return AsyncThrowingStream { continuation in
+                continuation.finish(throwing: NSError(domain: "OllamaBackend", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid base URL"]))
+            }
+        }
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")

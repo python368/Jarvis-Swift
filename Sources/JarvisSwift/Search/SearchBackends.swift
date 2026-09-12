@@ -3,7 +3,7 @@ import Foundation
 /// 搜索后端基类
 class SearchBackend: SearchProvider {
     let name: String
-    let providerType: SearchProviderType
+    var providerType: SearchProviderType
     let supportedTypes: [SearchProviderType]
     let config: SearchProviderConfig
     let session: URLSession
@@ -42,6 +42,17 @@ class SearchBackend: SearchProvider {
         case .none: break
         }
     }
+    
+    /// 将 baseURL 字符串转换为 URL
+    var baseURL: URL? {
+        URL(string: config.baseURL)
+    }
+    
+    /// 构建带路径的 URLComponents
+    func makeComponents(path: String) -> URLComponents? {
+        guard let base = baseURL else { return nil }
+        return URLComponents(url: base.appendingPathComponent(path), resolvingAgainstBaseURL: false)
+    }
 }
 
 /// Web 搜索后端（示例：使用 Brave Search / SerpAPI 兼容）
@@ -52,8 +63,7 @@ class WebSearchBackend: SearchBackend {
     }
     
     override func search(query: String, options: SearchOptions) async throws -> [SearchResult] {
-        // 示例：使用 Brave Search API 格式
-        var components = URLComponents(url: config.baseURL.appendingPathComponent("search"), resolvingAgainstBaseURL: false)!
+        var components = makeComponents(path: "search") ?? URLComponents()
         components.queryItems = [
             URLQueryItem(name: "q", value: query),
             URLQueryItem(name: "count", value: String(options.maxResults)),
@@ -62,7 +72,8 @@ class WebSearchBackend: SearchBackend {
         if let lang = options.language { components.queryItems?.append(URLQueryItem(name: "lang", value: lang)) }
         if let region = options.region { components.queryItems?.append(URLQueryItem(name: "country", value: region)) }
         
-        var request = buildRequest(url: components.url!, query: query, options: options)
+        guard let url = components.url else { return [] }
+        var request = buildRequest(url: url, query: query, options: options)
         request.httpMethod = "GET"
         
         let (data, response) = try await session.data(for: request)
@@ -93,7 +104,7 @@ class NewsSearchBackend: SearchBackend {
     }
     
     override func search(query: String, options: SearchOptions) async throws -> [SearchResult] {
-        var components = URLComponents(url: config.baseURL.appendingPathComponent("news"), resolvingAgainstBaseURL: false)!
+        var components = makeComponents(path: "news") ?? URLComponents()
         components.queryItems = [
             URLQueryItem(name: "q", value: query),
             URLQueryItem(name: "count", value: String(options.maxResults)),
@@ -102,7 +113,8 @@ class NewsSearchBackend: SearchBackend {
         if let lang = options.language { components.queryItems?.append(URLQueryItem(name: "lang", value: lang)) }
         if let region = options.region { components.queryItems?.append(URLQueryItem(name: "country", value: region)) }
         
-        var request = buildRequest(url: components.url!, query: query, options: options)
+        guard let url = components.url else { return [] }
+        var request = buildRequest(url: url, query: query, options: options)
         request.httpMethod = "GET"
         
         let (data, _) = try await session.data(for: request)
@@ -126,7 +138,7 @@ class ImageSearchBackend: SearchBackend {
     }
     
     override func search(query: String, options: SearchOptions) async throws -> [SearchResult] {
-        var components = URLComponents(url: config.baseURL.appendingPathComponent("images"), resolvingAgainstBaseURL: false)!
+        var components = makeComponents(path: "images") ?? URLComponents()
         components.queryItems = [
             URLQueryItem(name: "q", value: query),
             URLQueryItem(name: "count", value: String(options.maxResults)),
@@ -134,7 +146,8 @@ class ImageSearchBackend: SearchBackend {
         ]
         if let lang = options.language { components.queryItems?.append(URLQueryItem(name: "lang", value: lang)) }
         
-        var request = buildRequest(url: components.url!, query: query, options: options)
+        guard let url = components.url else { return [] }
+        var request = buildRequest(url: url, query: query, options: options)
         request.httpMethod = "GET"
         
         let (data, _) = try await session.data(for: request)
@@ -158,14 +171,14 @@ class DeepSearchBackend: SearchBackend {
     }
     
     override func search(query: String, options: SearchOptions) async throws -> [SearchResult] {
-        // 深度搜索通常需要更复杂的流程（多轮搜索、总结等），这里简化实现
-        var components = URLComponents(url: config.baseURL.appendingPathComponent("deep"), resolvingAgainstBaseURL: false)!
+        var components = makeComponents(path: "deep") ?? URLComponents()
         components.queryItems = [
             URLQueryItem(name: "q", value: query),
             URLQueryItem(name: "depth", value: "comprehensive")
         ]
         
-        var request = buildRequest(url: components.url!, query: query, options: options)
+        guard let url = components.url else { return [] }
+        var request = buildRequest(url: url, query: query, options: options)
         request.httpMethod = "GET"
         
         let (data, _) = try await session.data(for: request)
@@ -189,14 +202,14 @@ class CustomSearchBackend: SearchBackend {
     }
     
     override func search(query: String, options: SearchOptions) async throws -> [SearchResult] {
-        // 自定义搜索：用户可配置请求模板
-        var components = URLComponents(url: config.baseURL, resolvingAgainstBaseURL: false)!
+        var components = URLComponents(url: baseURL ?? URL(string: "")!, resolvingAgainstBaseURL: false) ?? URLComponents()
         components.queryItems = [
             URLQueryItem(name: "q", value: query),
             URLQueryItem(name: "limit", value: String(options.maxResults))
         ]
         
-        var request = buildRequest(url: components.url!, query: query, options: options)
+        guard let url = components.url else { return [] }
+        var request = buildRequest(url: url, query: query, options: options)
         request.httpMethod = "GET"
         
         let (data, _) = try await session.data(for: request)

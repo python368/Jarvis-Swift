@@ -1,4 +1,5 @@
 import Foundation
+import Combine
 
 /// 搜索结果
 struct SearchResult: Identifiable, Codable, Equatable {
@@ -91,7 +92,7 @@ final class SearchManager: ObservableObject {
     }
     
     var selectedProvider: SearchProviderConfig? {
-        selectedProviderID.flatMap { providers.first { $0.id == $0 } }
+        selectedProviderID.flatMap { id in providers.first { $0.id == id } }
     }
     
     var selectedBackend: SearchProvider? {
@@ -176,6 +177,9 @@ final class SearchManager: ObservableObject {
     }
     
     private func createDirectoryIfNeeded() {
-        storeURL.deletingLastPathComponent().createDirectoryIfNeeded()
+        let dir = storeURL.deletingLastPathComponent()
+        if !FileManager.default.fileExists(atPath: dir.path) {
+            try? FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
+        }
     }
 }

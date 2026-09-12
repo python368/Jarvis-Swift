@@ -1,0 +1,330 @@
+GNU GENERAL PUBLIC LICENSE
+                       Version 3, 29 June 2007
+
+ Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+
+                            PREAMBLE
+
+  The GNU General Public License is a free, copyleft license for
+software and other kinds of works.
+
+  The licenses for most software and other practical works are designed
+to take away your freedom to share and change the works.  By contrast,
+the GNU General Public License is intended to guarantee your freedom to
+share and change all versions of a program--to make sure it remains free
+software for all its users.  We, the Free Software Foundation, use the
+GNU General Public License for most of our software; it applies also to
+any other work released this way by its authors.  You can apply it to
+your programs, too.
+
+  When we speak of free software, we are referring to freedom, not
+price.  Our General Public Licenses are designed to make sure that you
+have the freedom to distribute copies of free software (and charge for
+them if you wish), that you receive source code or can get it if you
+want it, that you can change the software or use pieces of it in new
+free programs, and that you know you can do these things.
+
+  To protect your rights, we need to prevent others from denying you
+these rights or asking you to surrender the rights.  Therefore, you have
+responsibility to respect the freedom of others.
+
+  For example, if you distribute copies of such a program, whether
+gratis or for a fee, you must pass on to the recipients the same
+freedoms that you received.  You must make sure that they, too, receive
+or can get the source code.  And you must show them these terms so they
+know their rights.
+
+  Developers who use the GNU General Public License protect your rights
+with two steps: (1) assert copyright on the software, and (2) offer you
+this License giving you permission to copy, distribute and/or modify it.
+
+  For the developers and authors, the GNU General Public License
+provides the following advantages:
+
+  * It ensures that the program will remain free software for all its
+    users, and it gives you the freedom to copy, distribute, and modify
+    it.
+
+  * It gives you the legal framework to ensure that users who receive
+    your program have the freedom to use, study, modify, and distribute
+    the software.
+
+  * It prevents companies from taking your program, adding proprietary
+    features, and distributing the result as a proprietary product.
+
+  This License is designed to ensure that users have the freedom to run,
+study, share, and modify the software, and that these freedoms are
+preserved for all downstream recipients.
+
+  The precise terms and conditions for copying, distribution, and
+modification follow.
+
+                       TERMS AND CONDITIONS
+
+  0. Definitions.
+
+  "This License" refers to version 3 of the GNU General Public License.
+
+  "Copyright" also means copyright-like laws that apply to other kinds
+of works, such as semiconductor masks.
+
+  "The Program" refers to any copyrightable work licensed under this
+License.  Each licensee is addressed as "you".  "Licensees" and
+"recipients" may be individuals or organizations.
+
+  "Modify" means to copy from or adapt all or part of the work in a
+fashion requiring copyright permission, other than the making of an
+exact copy.  The resulting work is called a "modified version" of the
+earlier work or a work "based on" the earlier work.
+
+  "Covered Work" means either the unmodified Program or a work based
+on the Program.
+
+  "Propagate" a work means to do anything with it that, without
+permission, would make you liable for infringement under applicable
+copyright law, except executing it on a computer or modifying it in
+private.  Propagation includes copying, distribution (with or without
+modification), making available to the public, and in some cases
+statements of the program's composition or operation.
+
+  "Convey" a work means any kind of propagation that enables other
+parties to make copies of it.  Conveying does not include making
+modifications, nor does it include the act of executing a program.
+
+  "Appropriate Legal Notices" means an appropriate legal notice
+including the copyright notice and a statement that the work is
+licensed under the GNU General Public License, with a reference to
+the full license text.
+
+  1. Source Code.
+
+  The "source code" for a work means the preferred form of the work
+for making modifications to it.  "Object code" means any non-source
+form of a work.
+
+  2. Basic Permissions.
+
+  Subject to the terms and conditions of this License, you are
+granted the following permissions:
+
+  a) You may copy and distribute verbatim copies of the Program's
+source code as you receive it, in any medium, provided that you
+conspicuously and appropriately publish on each copy an appropriate
+copyright notice; keep intact all notices stating that this License
+applies to the code; keep intact all notices of the absence of any
+warranty; and give each recipient a copy of this License along
+with the code.
+
+  b) You may modify your copy of the Program, and, subject to the
+terms of this License, convey the resulting modified version, provided
+you comply with all the requirements of this License.
+
+  3. Protecting Users' Legal Rights From Anti-Circumvention Law.
+
+  No covered work shall be deemed part of an effective technological
+measure under any applicable law restricting circumvention of
+technological measures.  When you convey a covered work, you waive
+any legal power to prevent circumvention of technological measures
+to the extent the covered work is used in a non-infringing manner.
+
+  4. Conveying Verbatim Copies.
+
+  You may convey verbatim copies of the Program's source code as you
+receive it, in any medium, provided that you conspicuously and
+appropriately publish on each copy an appropriate copyright notice;
+keep intact all notices stating that this License applies to the
+code; keep intact all notices of the absence of any warranty; and
+give each recipient a copy of this License along with the code.
+
+  5. Conveying Modified Source Code Versions.
+
+  You may convey a work based on the Program, or the modifications
+to produce it from the Program, in the form of source code, provided
+that you meet all the following conditions:
+
+  a) The work must carry prominent notices stating that you modified
+it, and giving a relevant date.
+
+  b) The work must carry prominent notices stating that it is
+released under this License and any conditions imposed under section
+7.  This requirement also applies to modified versions of the Program
+where the modifications are made by you.
+
+  c) You must license the entire work, as a whole, under this
+License to anyone who comes into possession of it.  This License
+will therefore apply, with any conditions, to the whole work, and
+all its parts, regardless of how they are packaged.
+
+  d) If the work has interactive user interfaces, each must display
+Appropriate Legal Notices; however, if the Program does not have
+interactive user interfaces, this requirement does not apply to the
+work.
+
+  6. Conveying Non-Source Forms.
+
+  You may convey a covered work in object code form under the terms
+of sections 4 and 5, provided that you also convey the
+machine-readable Corresponding Source under the terms of this License,
+in one of these four ways:
+
+  a) Convey the object code in, or embodied in, a physical product
+(including a physical distribution medium), accompanied by the
+Corresponding Source fixed on a durable physical medium (such as a
+CD-ROM).
+
+  b) Convey the object code in, or embodied in, a physical product
+(including a physical distribution medium), accompanied by a written
+offer, valid for at least three years, to give anyone who possesses
+the object code a copy of the Corresponding Source for all the
+software in the product, at a price no more than the cost of
+physically performing the distribution.
+
+  c) Convey the object code by offering access from a designated
+place (such as a web site), at no charge, and providing equivalent
+access to the Corresponding Source in the same way through the same
+interface.
+
+  d) Convey the object code by offering access from a designated
+place (such as a web site), at no charge, and allowing anyone to
+copy the Corresponding Source in the same way through the same
+interface.
+
+  7. Additional Terms.
+
+  "Additional permissions" are terms that supplement the terms of
+this License by making exceptions from one or more of its requirements.
+For the convenience of the licensee, additional permissions may be
+written as separate documents, or may be incorporated in the License
+itself.  Any additional permissions that are applicable to the work
+in question may be stated in a separate document that accompanies the
+work, or may be included in the License itself.  You may not remove
+any additional permissions from the covered work.  If they apply to
+some parts of the covered work and not others, you may not remove
+those permissions from the covered work.
+
+  8. Termination.
+
+  You may not convey a covered work except as provided under this
+License.  Any attempt otherwise to convey a covered work is void, and
+will automatically terminate your rights under this License.
+However, if you cease all violation of this License, then your
+license from a particular copyright holder is reinstated (a)
+provisionally, unless and until the copyright holder explicitly and
+finally terminates your license, and (b) permanently, if the
+copyright holder fails to notify you of the termination by reasonable
+means.
+
+  9. Acceptance Not Required for Having Copies.
+
+  You are not required to accept this License in order to receive or
+make copies of the Program.  However, nothing other than this License
+grants you permission to copy, distribute, or modify the Program.
+These actions are forbidden unless you accept this License.  By
+doing any of these actions, you indicate your acceptance of this
+License to do so.
+
+  10. Automatic Licensing of Downstream Recipients.
+
+  Each time you convey a covered work, the recipient automatically
+receives a license from the original licensors to use, copy, modify,
+and convey that work, subject to this License.  You are not
+responsible for the licenses of subsequent recipients.
+
+  11. Patents.
+
+  A "contributor" is a copyright holder who authorizes the use of
+the covered work by the parties to this License.  The "essential
+patents" of a contributor are those it authorizes the use of under
+this License.  You may not convey the work if it contains a patent
+claim that would prevent the recipient from using the work in a
+non-infringing manner, unless you grant a patent license to the
+recipient.
+
+  12. No Surrender of Others' Rights.
+
+  If a term of this License is contradicted by a contract or
+government regulation, the terms of the contract or government
+regulation are invalid to the extent of the contradiction.
+
+  13. Use with the GNU Affero General Public License.
+
+  Notwithstanding any other provision of this License, you may not
+convey a covered work if it contains a covered work which is also
+licensed under the GNU Affero General Public License, unless the
+covered work is also licensed under this License.
+
+  14. Revised Versions of this License.
+
+  The Free Software Foundation may publish revised and/or new
+versions of the GNU General Public License from time to time.  Such
+new versions will be similar in spirit to the present version, but
+may differ in detail to address new issues.  You may accept any
+version of the License published by the Free Software Foundation
+if the Program is accompanied by a statement that it is licensed
+under "GNU General Public License version 3 or any later version."
+
+  15. Disclaimer of Warranty.
+
+  THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY
+APPLICABLE LAW.  THE PROGRAM IS PROVIDED "AS IS", WITHOUT WARRANTY
+OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE,
+AND NONINFECTIOUSNESS.  THE ENTIRE RISK AS TO THE QUALITY AND
+PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE PROGRAM PROVE
+DEFECTIVE, THE REPAIR OR REPLACEMENT COSTS ARE YOUR RESPONSIBILITY.
+
+  16. Limitation of Liability.
+
+  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN
+WRITING WILL ANY PARTY BE LIABLE TO ANY OTHER PARTY FOR DAMAGES,
+INCLUDING BUT NOT LIMITED TO DIRECT, INDIRECT, SPECIAL, INCIDENTAL,
+OR CONSEQUENTIAL DAMAGES, ARISING OUT OF OR IN CONNECTION WITH THE
+USE OR PERFORMANCE OF THE PROGRAM, EVEN IF ADVISED OF THE POSSIBILITY
+OF SUCH DAMAGES.
+
+  17. Interpretation of Sections 15 and 16.
+
+  If the disclaimer of warranty and limitation of liability provided
+in this License are found to be invalid under applicable law, the
+court shall apply the closest valid interpretation that is consistent
+with the intent of this License, which is the protection of the
+freedom of the users of the program.
+
+  18. How to Apply These Terms to Your New Programs.
+
+  If you develop a new program, and you want it to be of the
+greatest possible use to the public, the best way to achieve this is
+to make it free software which everyone can use, study, modify, and
+distribute.  To do this, attach the following notices to the program.
+It is safest to include the copyright notice and a reference to this
+License at the beginning of each source file.
+
+      <one line to give the program's name and a brief idea of what it does.>
+      Copyright (C) <year>  <name of author>
+
+      This program is free software: you can redistribute it and/or modify
+      it under the terms of the GNU General Public License as published by
+      the Free Software Foundation, either version 3 of the License, or
+      (at your option) any later version.
+
+      This program is distributed in the hope that it will be useful,
+      but WITHOUT ANY WARRANTY; without even the implied warranty of
+      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+      GNU General Public License for more details.
+
+      You should have received a copy of the GNU General Public License
+      along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+  Also add information on how to contact you by electronic and paper mail.
+
+  If the program does interact with users, it should provide a way
+for users to get a copy of the source code.  See the GNU General Public
+License for the details of the different ways of providing the source
+code.
+
+  The GNU General Public License is designed to protect the freedom
+to use, study, share, and modify software.  It is a copyleft license,
+which means that derivative works must also be licensed under the
+same terms.  This ensures that the software remains free for all users.

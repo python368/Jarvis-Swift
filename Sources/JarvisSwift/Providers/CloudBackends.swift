@@ -3,7 +3,7 @@ import Foundation
 /// OpenAI 兼容后端基类
 class OpenAICompatibleBackend: ModelBackend {
     let name: String
-    let providerType: ProviderType
+    var providerType: ProviderType
     let supportedCapabilities: [Capability]
     private let config: ProviderConfig
     private let session: URLSession

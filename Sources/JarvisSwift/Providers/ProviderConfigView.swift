@@ -11,11 +11,13 @@ struct ProviderConfigView: View {
         NavigationView {
             List {
                 if providerManager.providers.isEmpty {
-                    ContentUnavailableView(
-                        "暂无模型提供商",
+                    EmptyStateView(
+                        title: "暂无模型提供商",
                         systemImage: "cpu",
-                        description: Text("添加你的第一个 AI 模型提供商")
+                        description: "添加你的第一个 AI 模型提供商"
                     )
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
                 } else {
                     ForEach(providerManager.providers) { provider in
                         ProviderRow(
@@ -69,16 +71,18 @@ struct ProviderRow: View {
     let onEdit: () -> Void
     let onDelete: () -> Void
     let onToggle: () -> Void
+    @State private var showMenu = false
     
     var body: some View {
-        HStack {
-            // 类型图标
+        HStack(spacing: 12) {
             Image(systemName: provider.providerType.icon)
                 .font(.title3)
                 .foregroundStyle(provider.providerType.color)
-                .frame(width: 32)
+                .frame(width: 36, height: 36)
+                .background(provider.providerType.color.opacity(0.15))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
             
-            VStack(alignment: .leading, spacing: 2) {
+            VStack(alignment: .leading, spacing: 4) {
                 HStack {
                     Text(provider.name)
                         .font(.body.weight(.medium))
@@ -87,24 +91,32 @@ struct ProviderRow: View {
                             .foregroundStyle(.green)
                             .font(.caption)
                     }
-                }
-                
-                HStack(spacing: 8) {
-                    Label(provider.providerType.displayName, systemImage: "tag")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    if let model = provider.defaultModel {
-                        Label(model, systemImage: "cpu")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .lineLimit(1)
+                    if !provider.enabled {
+                        Text("已禁用")
+                            .font(.caption2)
+                            .padding(.horizontal, 6)
+                            .padding(.vertical, 1)
+                            .background(Color.orange.opacity(0.2))
+                            .foregroundStyle(.orange)
+                            .clipShape(Capsule())
                     }
                 }
+                
+                HStack(spacing: 10) {
+                    Label(provider.providerType.displayName, systemImage: "tag")
+                    if let model = provider.defaultModel {
+                        Label(model, systemImage: "cpu")
+                    }
+                    if provider.providerType.isLocal {
+                        Label("本地", systemImage: "desktopcomputer")
+                    }
+                }
+                .font(.caption)
+                .foregroundStyle(.secondary)
             }
             
             Spacer()
             
-            // 开关
             Toggle("", isOn: Binding(
                 get: { provider.enabled },
                 set: { _ in onToggle() }
@@ -112,7 +124,6 @@ struct ProviderRow: View {
             .toggleStyle(.switch)
             .labelsHidden()
             
-            // 菜单
             Menu {
                 Button("设为默认", action: onTap)
                 Button("编辑", action: onEdit)
@@ -126,22 +137,18 @@ struct ProviderRow: View {
             }
             .menuStyle(.borderlessButton)
         }
-        .padding(.vertical, 4)
+        .padding(.vertical, 6)
         .contentShape(Rectangle())
-        .onTapGesture(perform: onTap)
+        .onTapGesture {
+            if !isSelected { onTap() }
+        }
         .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(providerManagerSelectedColor(isSelected))
+            RoundedRectangle(cornerRadius: 10)
+                .fill(isSelected ? Color.accentColor.opacity(0.12) : .clear)
         )
-    }
-    
-    @EnvironmentObject var providerManager: ProviderManager
-    private func providerManagerSelectedColor(_ selected: Bool) -> Color {
-        selected ? Color.accentColor.opacity(0.1) : .clear
     }
 }
 
-/// 添加提供商视图
 struct AddProviderView: View {
     @ObservedObject var providerManager: ProviderManager
     @Environment(\.dismiss) var dismiss
@@ -167,9 +174,7 @@ struct AddProviderView: View {
                     }
                     .pickerStyle(.menu)
                     
-                    TextField("Base URL", text: $baseURL)
-                        .textContentType(.URL)
-                        .autocorrectionDisabled()
+                    TextField("Base URL", text: $baseURL).autocorrectionDisabled()
                     
                     TextField("默认模型 (可选)", text: $defaultModel)
                 }
@@ -234,7 +239,6 @@ struct AddProviderView: View {
     }
 }
 
-/// 编辑提供商视图
 struct EditProviderView: View {
     @ObservedObject var providerManager: ProviderManager
     let provider: ProviderConfig
@@ -268,7 +272,7 @@ struct EditProviderView: View {
                 Section("基本信息") {
                     TextField("名称", text: $name)
                     Text("类型: \(provider.providerType.displayName)").font(.caption).foregroundStyle(.secondary)
-                    TextField("Base URL", text: $baseURL).textContentType(.URL).autocorrectionDisabled()
+                    TextField("Base URL", text: $baseURL).autocorrectionDisabled()
                     TextField("默认模型 (可选)", text: $defaultModel)
                 }
                 
@@ -277,10 +281,13 @@ struct EditProviderView: View {
                         ForEach(AuthType.allCases, id: \.self) { type in
                             Text(type.rawValue).tag(type)
                         }
-                    }.pickerStyle(.segmented)
+                    }
+                    .pickerStyle(.segmented)
+                    
                     if authType != .none {
                         SecureField("API Key (留空保持不变)", text: $apiKey)
                     }
+                    
                     Toggle("自定义请求头", isOn: $showCustomHeaders)
                     if showCustomHeaders {
                         TextEditor(text: $customHeaders)
@@ -314,7 +321,11 @@ struct EditProviderView: View {
                 }
             }
             .navigationTitle("编辑提供商")
-            .toolbar { ToolbarItem(placement: .cancellationAction) { Button("取消") { dismiss() } } }
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("取消") { dismiss() }
+                }
+            }
         }
         .frame(width: 450, height: 550)
     }
@@ -382,6 +393,13 @@ extension ProviderType {
         case .lmStudio: return "LM Studio"
         case .mlc: return "MLC"
         case .localOther: return "其他本地"
+        }
+    }
+    
+    var isLocal: Bool {
+        switch self {
+        case .mlx, .llamaCpp, .ollama, .lmStudio, .mlc, .localOther: return true
+        default: return false
         }
     }
 }
