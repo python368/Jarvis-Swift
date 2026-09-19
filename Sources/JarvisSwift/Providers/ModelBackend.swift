@@ -18,25 +18,6 @@ enum MessageRole: String, Codable, CaseIterable {
     case tool = "tool"
 }
 
-/// 统一消息
-struct Message: Identifiable, Codable, Equatable {
-    let id: UUID
-    let role: MessageRole
-    var content: String
-    let timestamp: Date
-    var toolCalls: [ToolCall]?
-    var toolCallId: String?
-    
-    init(id: UUID = UUID(), role: MessageRole, content: String = "", timestamp: Date = Date(), toolCalls: [ToolCall]? = nil, toolCallId: String? = nil) {
-        self.id = id
-        self.role = role
-        self.content = content
-        self.timestamp = timestamp
-        self.toolCalls = toolCalls
-        self.toolCallId = toolCallId
-    }
-}
-
 /// 统一附件
 struct Attachment: Identifiable, Codable, Equatable {
     let id: UUID
@@ -229,7 +210,7 @@ final class ProviderManager: ObservableObject {
     
     static func defaultStoreURL() -> URL {
         let support = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first ?? FileManager.default.temporaryDirectory
-        return support.appendingPathComponent("Jarvis", isDirectory: true).appendingPathComponent("Providers.json")
+        return support.appendingPathComponent("Relay", isDirectory: true).appendingPathComponent("Providers.json")
     }
     
     var selectedProvider: ProviderConfig? {

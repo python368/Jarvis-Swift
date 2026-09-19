@@ -88,7 +88,7 @@ final class SearchManager: ObservableObject {
     
     static func defaultStoreURL() -> URL {
         let support = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first ?? FileManager.default.temporaryDirectory
-        return support.appendingPathComponent("Jarvis", isDirectory: true).appendingPathComponent("SearchProviders.json")
+        return support.appendingPathComponent("Relay", isDirectory: true).appendingPathComponent("SearchProviders.json")
     }
     
     var selectedProvider: SearchProviderConfig? {

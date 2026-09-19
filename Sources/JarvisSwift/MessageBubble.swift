@@ -72,7 +72,7 @@ struct AvatarView: View {
                 .fill(isUser ? Color(red: 0.0, green: 0.48, blue: 1.0) : Color.gray.opacity(0.3))
                 .frame(width: 32, height: 32)
             
-            Image(systemName: isUser ? "person.fill" : "brain.head.profile")
+            Image(systemName: isUser ? "person.fill" : "arrow.uturn.forward")
                 .font(.system(size: 14, weight: .medium))
                 .foregroundStyle(isUser ? .white : .gray)
         }
@@ -82,7 +82,7 @@ struct AvatarView: View {
 struct MessageBubble_Previews: PreviewProvider {
     static var previews: some View {
         VStack(spacing: 16) {
-            MessageBubble(message: Message(id: UUID(), text: "Hello, Jarvis! 这是一个测试消息，包含多行内容来测试气泡的自适应高度和宽度。", isUser: false))
+            MessageBubble(message: Message(id: UUID(), text: "Hello, Relay! 这是一个测试消息，包含多行内容来测试气泡的自适应高度和宽度。", isUser: false))
             MessageBubble(message: Message(id: UUID(), text: "I want to clean my desktop.", isUser: true))
             MessageBubble(message: Message(id: UUID(), text: "短消息", isUser: false))
             MessageBubble(message: Message(id: UUID(), text: "这是一条很长的用户消息，用来测试用户气泡在右侧对齐以及长文本的换行处理是否正确工作。", isUser: true))

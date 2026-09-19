@@ -1,7 +1,7 @@
 import Foundation
 
 /// Agent 状态
-enum AgentState: Equatable {
+enum AgentState: Codable, Equatable {
     case idle
     case observing
     case planning
@@ -9,14 +9,14 @@ enum AgentState: Equatable {
     case verifying
     case recovering
     case completed
-    case failed(Error)
+    case failed(String)
     
     static func == (lhs: AgentState, rhs: AgentState) -> Bool {
         switch (lhs, rhs) {
         case (.idle, .idle), (.observing, .observing), (.planning, .planning), (.acting, .acting), (.verifying, .verifying), (.recovering, .recovering), (.completed, .completed):
             return true
         case (.failed(let lhsErr), .failed(let rhsErr)):
-            return lhsErr.localizedDescription == rhsErr.localizedDescription
+            return lhsErr == rhsErr
         default:
             return false
         }
@@ -159,7 +159,9 @@ final class AgentEngine: ObservableObject {
     private func executeTaskLoop() {
         Task { [weak self] in
             guard let self = self else { return }
-            while let task = self.currentTask, !task.isCompleted, !task.hasFailed {
+            var task = self.currentTask
+            guard task != nil else { return }
+            while let currentTask = task, !currentTask.isCompleted, !currentTask.hasFailed {
                 do {
                     // 1. Observe
                     self.state = .observing
@@ -168,19 +170,19 @@ final class AgentEngine: ObservableObject {
                     
                     // 2. Plan
                     self.state = .planning
-                    let plan = try await self.plan(goal: task.goal, observation: observation, history: task.actions)
-                    task.actions = plan
-                    task.currentActionIndex = 0
+                    let plan = try await self.plan(goal: currentTask.goal, observation: try await self.observe(), history: currentTask.actions)
+                    task?.actions = plan
+                    task?.currentActionIndex = 0
                     
                     // 3. Act + Verify 循环
                     for (index, action) in plan.enumerated() {
-                        guard self.currentTask?.id == task.id else { break }
-                        task.currentActionIndex = index
+                        guard self.currentTask?.id == task?.id else { break }
+                        task?.currentActionIndex = index
                         
                         self.state = .acting
                         let result = try await self.act(action: action)
-                        task.actions[index].status = .completed
-                        task.actions[index].result = result
+                        task?.actions[index].status = .completed
+                        task?.actions[index].result = result
                         
                         self.state = .verifying
                         let verified = try await self.verify(action: action, expectedResult: result)
@@ -194,18 +196,12 @@ final class AgentEngine: ObservableObject {
                     }
                     
                     self.state = .completed
-                    task.state = .completed
-                    task.updatedAt = Date()
-                    self.memoryStore.addMemory(content: "完成任务: \(task.goal)", category: .longTermTask, importance: 0.8, tags: ["completed"], sourceConversationID: nil)
-                    
-                } catch {
-                    self.state = .failed(error)
-                    if let task = self.currentTask {
-                        task.state = .failed(error)
-                        task.updatedAt = Date()
+                    task?.state = .completed
+                    } catch {
+                    self.state = .failed(error.localizedDescription)
+                    if let t = self.currentTask {
+                        t.state = .failed(error.localizedDescription)
                     }
-                    self.errorMessage = error.localizedDescription
-                    break
                 }
             }
             self.taskContinuation?.resume()
@@ -240,7 +236,7 @@ final class AgentEngine: ObservableObject {
         }
         
         let systemPrompt = """
-        You are Jarvis, an AI agent that controls macOS. Generate a sequence of actions to achieve the user's goal.
+        You are Relay, an AI agent that controls macOS. Generate a sequence of actions to achieve the user's goal.
         Available action types: \(ActionType.allCases.map { $0.rawValue }.joined(separator: ", "))
         Current observation: Active app: \(observation.activeApp ?? "none"), Windows: \(observation.openWindows.map { "\($0.appName): \($0.windowTitle)" }.joined(separator: ", "))
         History: \(history.map { "\($0.type.rawValue): \($0.description)" }.joined(separator: "; "))

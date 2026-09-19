@@ -1,7 +1,30 @@
 import SwiftUI
 
-struct JarvisSettingsView: View {
-    @ObservedObject var theme: JarvisTheme
+/// 空状态视图（兼容 macOS 13+）
+struct EmptyStateView: View {
+    let title: String
+    let systemImage: String
+    let description: String
+    
+    var body: some View {
+        VStack(spacing: 16) {
+            Image(systemName: systemImage)
+                .font(.system(size: 48))
+                .foregroundStyle(.secondary)
+            Text(title)
+                .font(.title2.weight(.medium))
+            Text(description)
+                .font(.body)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .padding()
+    }
+}
+
+struct RelaySettingsView: View {
+    @ObservedObject var theme: RelayTheme
     @ObservedObject var memoryStore: MemoryStore
     @ObservedObject var providerManager: ProviderManager
     @ObservedObject var searchManager: SearchManager
@@ -61,14 +84,14 @@ struct JarvisSettingsView: View {
 
 // MARK: - 外观设置
 struct AppearanceSettingsView: View {
-    @ObservedObject var theme: JarvisTheme
+    @ObservedObject var theme: RelayTheme
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         Form {
             Section("主题模式") {
                 Picker("外观", selection: $theme.appearance) {
-                    ForEach(JarvisAppearance.allCases, id: \.self) { item in
+                    ForEach(RelayAppearance.allCases, id: \.self) { item in
                         Label(item.label, systemImage: item.icon).tag(item)
                     }
                 }
@@ -79,7 +102,7 @@ struct AppearanceSettingsView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     // 预设色
                     LazyVGrid(columns: [GridItem(.adaptive(minimum: 40))], spacing: 12) {
-                        ForEach(JarvisAccentColor.allCases.filter { !$0.isCustom }, id: \.self) { accent in
+                        ForEach(RelayAccentColor.allCases.filter { !$0.isCustom }, id: \.self) { accent in
                             AccentColorPicker(accent: accent, selected: theme.accent, customColor: theme.customAccentColor) {
                                 theme.accent = accent
                                 if accent.isCustom {
@@ -125,10 +148,10 @@ struct ProviderSettingsView: View {
         Form {
             Section {
                 if providerManager.providers.isEmpty {
-                    ContentUnavailableView(
-                        "暂无模型提供商",
+                    EmptyStateView(
+                        title: "暂无模型提供商",
                         systemImage: "cpu",
-                        description: Text("添加 AI 模型提供商以启用 AI 对话功能")
+                        description: "添加 AI 模型提供商以启用 AI 对话功能"
                     )
                     .frame(maxWidth: .infinity, minHeight: 200)
                 } else {
@@ -290,11 +313,11 @@ struct SearchSettingsView: View {
     var body: some View {
         Form {
             Section {
-                if searchManager.providers.isEmpty {
-                    ContentUnavailableView(
-                        "暂无搜索引擎",
+if searchManager.providers.isEmpty {
+                    EmptyStateView(
+                        title: "暂无搜索引擎",
                         systemImage: "magnifyingglass",
-                        description: Text("添加搜索提供商以启用联网搜索")
+                        description: "添加搜索提供商以启用联网搜索"
                     )
                     .frame(maxWidth: .infinity, minHeight: 200)
                 } else {
@@ -346,6 +369,72 @@ struct SearchSettingsView: View {
             if let provider = editingProvider {
                 EditSearchProviderView(searchManager: SearchManager(), provider: provider)
             }
+        }
+    }
+}
+
+struct SearchProviderSettingsRow: View {
+    let provider: SearchProviderConfig
+    let isSelected: Bool
+    let onSelect: () -> Void
+    let onEdit: () -> Void
+    let onDelete: () -> Void
+    let onToggle: () -> Void
+    
+    var body: some View {
+        HStack {
+            Image(systemName: provider.providerType.icon)
+                .font(.title3)
+                .foregroundStyle(provider.providerType.color)
+                .frame(width: 32)
+            
+            VStack(alignment: .leading, spacing: 2) {
+                HStack {
+                    Text(provider.name)
+                        .font(.body.weight(.medium))
+                    if isSelected {
+                        Image(systemName: "checkmark.circle.fill")
+                            .foregroundStyle(.green)
+                            .font(.caption)
+                    }
+                }
+                
+                HStack(spacing: 8) {
+                    Label(provider.providerType.displayName, systemImage: "tag")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Label("最多 \(provider.defaultOptions.maxResults) 条", systemImage: "number")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            
+            Spacer()
+            
+            Toggle("", isOn: Binding(
+                get: { provider.enabled },
+                set: { _ in onToggle() }
+            ))
+            .toggleStyle(.switch)
+            .labelsHidden()
+            
+            Menu {
+                Button("设为默认", action: onSelect)
+                Button("编辑", action: onEdit)
+                Divider()
+                Button("删除", role: .destructive, action: onDelete)
+            } label: {
+                Image(systemName: "ellipsis")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .frame(width: 32, height: 32)
+            }
+            .menuStyle(.borderlessButton)
+        }
+        .padding(.vertical, 4)
+        .contentShape(Rectangle())
+        .onTapGesture {
+            if !isSelected { onSelect() }
         }
     }
 }
@@ -405,7 +494,7 @@ struct MemorySettingsView: View {
             }
         }
         .sheet(isPresented: $showMemoryList) {
-            MemoryListView(memoryStore: MemoryStore.shared)
+            MemoryListView(memoryStore: memoryStore)
         }
         .alert("确认清空全部记忆？", isPresented: $showClearConfirm) {
             Button("取消", role: .cancel) {}
@@ -413,12 +502,18 @@ struct MemorySettingsView: View {
         } message: {
             Text("将删除所有对话历史和长期记忆，此操作不可撤销。")
         }
-        .fileExporter(isPresented: $showExportSheet, document: MemoryExportDocument(data: exportData ?? Data()), contentType: .json, defaultFilename: "JarvisMemory_\(Date().formatted(date: .numeric, time: .omitted)).json") { _ in }
+        .fileExporter(isPresented: $showExportSheet, document: MemoryExportDocument(data: exportData ?? Data()), contentType: .json, defaultFilename: "RelayMemory_\(Date().formatted(date: .numeric, time: .omitted)).json") { _ in }
         .fileImporter(isPresented: $showImportPicker, allowedContentTypes: [.json], allowsMultipleSelection: false) { result in
             if case .success(let urls) = result, let url = urls.first,
                let data = try? Data(contentsOf: url) {
                 MemoryStore.shared.importData(data)
             }
+        }
+        .alert("确认清空全部记忆？", isPresented: $showClearConfirm) {
+            Button("取消", role: .cancel) {}
+            Button("清空", role: .destructive) { memoryStore.clearAll() }
+        } message: {
+            Text("将删除所有对话历史和长期记忆，此操作不可撤销。")
         }
     }
     
@@ -427,6 +522,18 @@ struct MemorySettingsView: View {
             exportData = data
             showExportSheet = true
         }
+    }
+    
+    // 格式化字节数
+    private func formatBytes(_ bytes: Int64) -> String {
+        let units = ["B", "KB", "MB", "GB", "TB"]
+        var size = Double(bytes)
+        var unitIndex = 0
+        while size >= 1024 && unitIndex < units.count - 1 {
+            size /= 1024
+            unitIndex += 1
+        }
+        return String(format: "%.1f %@", size, units[unitIndex])
     }
 }
 
@@ -460,15 +567,15 @@ struct PrivacyDataView: View {
             }
             
             Section("说明") {
-                Text("Jarvis 尊重你的设备和数据。你的 API Key 直接调用你指定的 Provider，不经过任何中转。本地模型完全运行在你的设备上。")
+                Text("Relay 尊重你的设备和数据。你的 API Key 直接调用你指定的 Provider，不经过任何中转。本地模型完全运行在你的设备上。")
                     .font(.caption)
                     .foregroundStyle(.secondary)
-                Text("记忆属于你和 Jarvis 数据层，不属于任何模型。模型可以换，记忆不能跟着模型一起消失。")
+                Text("记忆属于你和 Relay 数据层，不属于任何模型。模型可以换，记忆不能跟着模型一起消失。")
                     .font(.caption)
                     .foregroundStyle(.secondary)
             }
         }
-        .fileExporter(isPresented: $showExportSheet, document: MemoryExportDocument(data: exportData ?? Data()), contentType: .json, defaultFilename: "JarvisAllData_\(Date().formatted(date: .numeric, time: .omitted)).json") { _ in }
+        .fileExporter(isPresented: $showExportSheet, document: MemoryExportDocument(data: exportData ?? Data()), contentType: .json, defaultFilename: "RelayAllData_\(Date().formatted(date: .numeric, time: .omitted)).json") { _ in }
         .fileImporter(isPresented: $showImportPicker, allowedContentTypes: [.json], allowsMultipleSelection: false) { result in
             if case .success(let urls) = result, let url = urls.first,
                let data = try? Data(contentsOf: url) {
@@ -515,13 +622,13 @@ struct AboutView: View {
         Form {
             Section {
                 VStack(spacing: 16) {
-                    Image(systemName: "brain.head.profile")
+                    Image(systemName: "arrow.uturn.forward")
                         .font(.system(size: 64))
                         .foregroundStyle(
                             LinearGradient(colors: [.blue, .purple], startPoint: .topLeading, endPoint: .bottomTrailing)
                         )
                     
-                    Text("Jarvis Swift")
+                    Text("Relay")
                         .font(.title.weight(.bold))
                     Text("版本 0.1.0 (Alpha)")
                         .foregroundStyle(.secondary)
@@ -537,7 +644,7 @@ struct AboutView: View {
             
             Section("核心理念") {
                 VStack(alignment: .leading, spacing: 12) {
-                    AboutRow(icon: "lightbulb", title: "用户给意图，不给步骤", desc: "你说目标，Jarvis 负责寻路并完成")
+                    AboutRow(icon: "lightbulb", title: "用户给意图，不给步骤", desc: "你说目标，Relay 负责寻路并完成")
                     AboutRow(icon: "graduationcap", title: "零学习成本", desc: "像普通 Mac App 一样简单，无需懂 Agent、API、Token")
                     AboutRow(icon: "repeat", title: "Observe → Plan → Act → Verify → Recover", desc: "失败不等于任务失败，自动重试换路")
                     AboutRow(icon: "lock", title: "用户拥有最终控制权", desc: "高风险操作需确认，模型/Provider/记忆全由用户决定")
@@ -554,8 +661,8 @@ struct AboutView: View {
             }
             
             Section("开源协议") {
-                Link("GitHub 仓库", destination: URL(string: "https://github.com/python368/Jarvis-Swift")!)
-                Text("MIT License")
+                Link("GitHub 仓库", destination: URL(string: "https://github.com/python368/Relay")!)
+                Text("GPL-3.0-only License")
                     .foregroundStyle(.secondary)
             }
         }
@@ -585,8 +692,8 @@ struct AboutRow: View {
 // MARK: - 辅助视图组件
 
 struct AccentColorPicker: View {
-    let accent: JarvisAccentColor
-    let selected: JarvisAccentColor
+    let accent: RelayAccentColor
+    let selected: RelayAccentColor
     let customColor: Color
     let action: () -> Void
     
@@ -616,7 +723,7 @@ struct AccentColorPicker: View {
 }
 
 struct ThemePreviewCard: View {
-    @ObservedObject var theme: JarvisTheme
+    @ObservedObject var theme: RelayTheme
     
     var body: some View {
         VStack(spacing: 12) {
@@ -630,7 +737,7 @@ struct ThemePreviewCard: View {
                 VStack(alignment: .leading, spacing: 8) {
                     HStack {
                         Circle().fill(theme.semanticColors.accent).frame(width: 8, height: 8)
-                        Text("Jarvis 主题预览").font(.caption.weight(.medium))
+                        Text("Relay 主题预览").font(.caption.weight(.medium))
                         Spacer()
                         Circle().fill(theme.semanticColors.accent).frame(width: 10, height: 10)
                     }
@@ -662,7 +769,7 @@ struct ThemePreviewCard: View {
 }
 
 struct PreviewButtonStyle: ButtonStyle {
-    let theme: JarvisTheme
+    let theme: RelayTheme
     let style: PreviewStyle
     
     enum PreviewStyle { case primary, secondary, ghost }
@@ -698,39 +805,206 @@ struct PreviewButtonStyle: ButtonStyle {
         return pressed ? base.opacity(0.7) : base
     }
 }
-
-extension JarvisAppearance {
-    var icon: String {
-        switch self {
-        case .system: return "circle.lefthalf.filled"
-        case .light: return "sun.max"
-        case .dark: return "moon"
+    
+    // MARK: - 记忆列表视图
+    struct MemoryListView: View {
+    @ObservedObject var memoryStore: MemoryStore
+    @Environment(\.dismiss) var dismiss
+    @State private var selectedMemory: MemoryEntry?
+    @State private var showDeleteConfirm = false
+    @State private var memoryToDelete: MemoryEntry?
+    
+    var body: some View {
+        NavigationView {
+            List {
+                Section("长期记忆 (\(memoryStore.memories.count))") {
+                    if memoryStore.memories.isEmpty {
+                        Text("暂无长期记忆")
+                            .foregroundStyle(.secondary)
+                    } else {
+                        ForEach(memoryStore.memories.sorted { $0.createdAt > $1.createdAt }) { memory in
+                            MemoryRow(memory: memory)
+                                .onTapGesture {
+                                    selectedMemory = memory
+                                }
+                                .swipeActions(edge: .trailing) {
+                                    Button(role: .destructive) {
+                                        memoryToDelete = memory
+                                        showDeleteConfirm = true
+                                    } label: {
+                                        Label("删除", systemImage: "trash")
+                                    }
+                                }
+                        }
+                    }
+                }
+                
+                Section("历史对话 (\(memoryStore.conversations.count))") {
+                    if memoryStore.conversations.isEmpty {
+                        Text("暂无历史对话")
+                            .foregroundStyle(.secondary)
+                    } else {
+                        ForEach(memoryStore.conversations.sorted { $0.updatedAt > $1.updatedAt }) { conv in
+                            ConversationRow(conversation: conv)
+                        }
+                    }
+                }
+            }
+            .navigationTitle("记忆管理")
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("完成") { dismiss() }
+                }
+            }
+            .sheet(item: $selectedMemory) { memory in
+                MemoryDetailView(memory: memory, memoryStore: memoryStore)
+            }
+            .alert("删除这条记忆？", isPresented: $showDeleteConfirm, presenting: memoryToDelete) { memory in
+                Button("取消", role: .cancel) {}
+                Button("删除", role: .destructive) {
+                    memoryStore.deleteMemory(id: memory.id)
+                }
+            } message: { memory in
+                Text("确定要删除这条记忆吗？\n\n\(memory.content.prefix(100))...")
+            }
         }
     }
 }
 
-extension MotionPreference {
-    var icon: String {
-        switch self {
-        case .standard: return "hare"
-        case .reduced: return "tortoise"
+struct MemoryRow: View {
+    let memory: MemoryEntry
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Text(memory.category.rawValue)
+                    .font(.caption)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(Color.accentColor.opacity(0.2))
+                    .cornerRadius(4)
+                Spacer()
+                Text(memory.createdAt, style: .relative)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Text(memory.content)
+                .lineLimit(2)
+                .font(.body)
+            HStack {
+                Text("重要性: \(Int(memory.importance * 100))%")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                if !memory.tags.isEmpty {
+                    Text(memory.tags.joined(separator: ", "))
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+        }
+        .padding(.vertical, 4)
+    }
+}
+
+struct ConversationRow: View {
+    let conversation: Conversation
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            HStack {
+                Text(conversation.title)
+                    .font(.body)
+                    .lineLimit(1)
+                Spacer()
+                Text(conversation.updatedAt, style: .relative)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            Text("\(conversation.messages.count) 条消息")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .padding(.vertical, 4)
+    }
+}
+
+struct MemoryDetailView: View {
+    let memory: MemoryEntry
+    @ObservedObject var memoryStore: MemoryStore
+    @Environment(\.dismiss) var dismiss
+    
+    var body: some View {
+        NavigationView {
+            Form {
+                Section("内容") {
+                    Text(memory.content)
+                        .textSelection(.enabled)
+                }
+                
+                Section("元数据") {
+                    HStack {
+                        Text("分类")
+                        Spacer()
+                        Text(memory.category.rawValue)
+                            .foregroundStyle(.secondary)
+                    }
+                    HStack {
+                        Text("重要性")
+                        Spacer()
+                        Text("\(Int(memory.importance * 100))%")
+                            .foregroundStyle(.secondary)
+                    }
+                    HStack {
+                        Text("创建时间")
+                        Spacer()
+                        Text(memory.createdAt.formatted(date: .abbreviated, time: .shortened))
+                            .foregroundStyle(.secondary)
+                    }
+                    HStack {
+                        Text("更新时间")
+                        Spacer()
+                        Text(memory.updatedAt.formatted(date: .abbreviated, time: .shortened))
+                            .foregroundStyle(.secondary)
+                    }
+                    if !memory.tags.isEmpty {
+                        HStack {
+                            Text("标签")
+                            Spacer()
+                            Text(memory.tags.joined(separator: ", "))
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    if let sourceID = memory.sourceConversationID {
+                        HStack {
+                            Text("来源对话")
+                            Spacer()
+                            Text(sourceID.uuidString.prefix(8) + "...")
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+                
+                Section {
+                    Button("删除", role: .destructive) {
+                        memoryStore.deleteMemory(id: memory.id)
+                        dismiss()
+                    }
+                }
+            }
+            .navigationTitle("记忆详情")
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("关闭") { dismiss() }
+                }
+            }
         }
     }
 }
 
-extension ProviderType {
-    var isLocal: Bool {
-        switch self {
-        case .mlx, .llamaCpp, .ollama, .lmStudio, .mlc, .localOther: return true
-        default: return false
-        }
-    }
-}
-
-struct JarvisSettingsView_Previews: PreviewProvider {
+struct RelaySettingsView_Previews: PreviewProvider {
     static var previews: some View {
-        JarvisSettingsView(
-            theme: JarvisTheme(),
+        RelaySettingsView(
+            theme: RelayTheme(),
             memoryStore: MemoryStore.shared,
             providerManager: ProviderManager(),
             searchManager: SearchManager()

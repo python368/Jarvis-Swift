@@ -1,8 +1,8 @@
 import SwiftUI
 import Combine
 
-/// Jarvis 强调色（符合 README：蓝/紫/绿/橙/红/粉/黄/系统/自定义）
-enum JarvisAccentColor: String, CaseIterable, Codable {
+/// Relay 强调色（符合 README：蓝/紫/绿/橙/红/粉/黄/系统/自定义）
+enum RelayAccentColor: String, CaseIterable, Codable {
     case blue, purple, green, orange, red, pink, yellow, system, custom
     
     var color: Color {
@@ -37,7 +37,7 @@ enum JarvisAccentColor: String, CaseIterable, Codable {
 }
 
 /// 外观模式（符合 README：跟随系统/浅色/深色）
-enum JarvisAppearance: String, CaseIterable, Codable {
+enum RelayAppearance: String, CaseIterable, Codable {
     case system, light, dark
     
     var label: String {
@@ -45,6 +45,14 @@ enum JarvisAppearance: String, CaseIterable, Codable {
         case .system: return "跟随系统"
         case .light: return "浅色"
         case .dark: return "深色"
+        }
+    }
+    
+    var icon: String {
+        switch self {
+        case .system: return "circle.lefthalf.filled"
+        case .light: return "sun.max"
+        case .dark: return "moon"
         }
     }
 }
@@ -60,13 +68,20 @@ enum MotionPreference: String, CaseIterable, Codable {
         case .reduced: return "减少动态效果"
         }
     }
+    
+    var icon: String {
+        switch self {
+        case .standard: return "hare"
+        case .reduced: return "tortoise"
+        }
+    }
 }
 
-/// Jarvis 主题系统（符合 README：Liquid Glass / 现代系统材质 + 语义化颜色 + 动效层级）
-final class JarvisTheme: ObservableObject {
-    @Published var accent: JarvisAccentColor = .blue
+/// Relay 主题系统（符合 README：Liquid Glass / 现代系统材质 + 语义化颜色 + 动效层级）
+final class RelayTheme: ObservableObject {
+    @Published var accent: RelayAccentColor = .blue
     @Published var customAccentColor: Color = .blue
-    @Published var appearance: JarvisAppearance = .system
+    @Published var appearance: RelayAppearance = .system
     @Published var motion: MotionPreference = .standard
     @Published var reduceTransparency: Bool = false
     
@@ -74,25 +89,25 @@ final class JarvisTheme: ObservableObject {
     
     init() {
         // 从 UserDefaults 恢复
-        accent = JarvisDefaults.accent
-        if let data = UserDefaults.standard.data(forKey: "jarvis.customAccentColor"),
+        accent = RelayDefaults.accent
+        if let data = UserDefaults.standard.data(forKey: "relay.customAccentColor"),
            let color = try? NSKeyedUnarchiver.unarchivedObject(ofClass: NSColor.self, from: data) {
             customAccentColor = Color(color)
         }
-        appearance = JarvisDefaults.appearance
-        motion = MotionPreference(rawValue: UserDefaults.standard.string(forKey: "jarvis.motion") ?? "standard") ?? .standard
-        reduceTransparency = UserDefaults.standard.bool(forKey: "jarvis.reduceTransparency")
+        appearance = RelayDefaults.appearance
+        motion = MotionPreference(rawValue: UserDefaults.standard.string(forKey: "relay.motion") ?? "standard") ?? .standard
+        reduceTransparency = UserDefaults.standard.bool(forKey: "relay.reduceTransparency")
         
         // 监听变化并持久化
-        $accent.sink { [weak self] v in self?.applyAccent(v); JarvisDefaults.accent = v }.store(in: &cancellables)
-        $customAccentColor.sink { [weak self] v in
-            if let nsColor = NSColor(v) {
-                try? UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: nsColor, requiringSecureCoding: false), forKey: "jarvis.customAccentColor")
+        $accent.sink { [weak self] v in self?.applyAccent(v); RelayDefaults.accent = v }.store(in: &cancellables)
+        $customAccentColor.sink { v in
+            if let nsColor = v.toNSColor() {
+                try? UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: nsColor, requiringSecureCoding: false), forKey: "relay.customAccentColor")
             }
         }.store(in: &cancellables)
-        $appearance.sink { [weak self] v in self?.applyAppearance(v); JarvisDefaults.appearance = v }.store(in: &cancellables)
-        $motion.sink { v in UserDefaults.standard.set(v.rawValue, forKey: "jarvis.motion") }.store(in: &cancellables)
-        $reduceTransparency.sink { v in UserDefaults.standard.set(v, forKey: "jarvis.reduceTransparency") }.store(in: &cancellables)
+        $appearance.sink { [weak self] v in self?.applyAppearance(v); RelayDefaults.appearance = v }.store(in: &cancellables)
+        $motion.sink { v in UserDefaults.standard.set(v.rawValue, forKey: "relay.motion") }.store(in: &cancellables)
+        $reduceTransparency.sink { v in UserDefaults.standard.set(v, forKey: "relay.reduceTransparency") }.store(in: &cancellables)
         
         // 初始应用
         applyAppearance(appearance)
@@ -113,11 +128,11 @@ final class JarvisTheme: ObservableObject {
         AnimationConfig(motion: motion)
     }
     
-    private func applyAccent(_ value: JarvisAccentColor) {
+    private func applyAccent(_ value: RelayAccentColor) {
         // 强调色由 semanticColors 驱动，不修改系统级设置
     }
     
-    private func applyAppearance(_ value: JarvisAppearance) {
+    private func applyAppearance(_ value: RelayAppearance) {
         switch value {
         case .system: NSApplication.shared.appearance = nil
         case .light:  NSApplication.shared.appearance = NSAppearance(named: .aqua)
@@ -129,7 +144,7 @@ final class JarvisTheme: ObservableObject {
 /// 语义化颜色系统
 struct SemanticColors {
     let accent: Color
-    let appearance: JarvisAppearance
+    let appearance: RelayAppearance
     let reduceTransparency: Bool
     
     // 基础材质（符合 Liquid Glass：半透明玻璃材质 + 清晰空间层级）
@@ -182,21 +197,21 @@ struct AnimationConfig {
     let motion: MotionPreference
     
     // Layer 1: 即时反馈（按钮、Hover、点击）< 100ms
-    var instant: Animation { motion == .reduced ? .none : .spring(response: 0.15, dampingFraction: 0.8) }
-    var instantFast: Animation { motion == .reduced ? .none : .spring(response: 0.08, dampingFraction: 0.7) }
+    var instant: Animation { motion == .reduced ? .linear(duration: 0) : .spring(response: 0.15, dampingFraction: 0.8) }
+    var instantFast: Animation { motion == .reduced ? .linear(duration: 0) : .spring(response: 0.08, dampingFraction: 0.7) }
     
     // Layer 2: 状态变化（启动、任务开始/完成）200-300ms
-    var stateChange: Animation { motion == .reduced ? .none : .spring(response: 0.25, dampingFraction: 0.85) }
-    var stateChangeSlow: Animation { motion == .reduced ? .none : .spring(response: 0.35, dampingFraction: 0.9) }
+    var stateChange: Animation { motion == .reduced ? .linear(duration: 0) : .spring(response: 0.25, dampingFraction: 0.85) }
+    var stateChangeSlow: Animation { motion == .reduced ? .linear(duration: 0) : .spring(response: 0.35, dampingFraction: 0.9) }
     
     // Layer 3: 环境动画（玻璃、背景、Agent 状态）400-600ms
-    var ambient: Animation { motion == .reduced ? .none : .easeInOut(duration: 0.5) }
-    var ambientSlow: Animation { motion == .reduced ? .none : .easeInOut(duration: 0.8) }
+    var ambient: Animation { motion == .reduced ? .linear(duration: 0) : .easeInOut(duration: 0.5) }
+    var ambientSlow: Animation { motion == .reduced ? .linear(duration: 0) : .easeInOut(duration: 0.8) }
     
     // Layer 4: 静态内容（文字、设置、列表）无动画或极快
-    var staticContent: Animation { .none }
-    var listInsertion: Animation { motion == .reduced ? .none : .spring(response: 0.3, dampingFraction: 0.8) }
-    var listRemoval: Animation { motion == .reduced ? .none : .spring(response: 0.2, dampingFraction: 0.7) }
+    var staticContent: Animation { .linear(duration: 0) }
+    var listInsertion: Animation { motion == .reduced ? .linear(duration: 0) : .spring(response: 0.3, dampingFraction: 0.8) }
+    var listRemoval: Animation { motion == .reduced ? .linear(duration: 0) : .spring(response: 0.2, dampingFraction: 0.7) }
     
     // 交互反馈
     var pressScale: CGFloat { motion == .reduced ? 1.0 : 0.96 }
@@ -210,32 +225,49 @@ struct AnimationConfig {
 }
 
 /// UserDefaults 持久化
-struct JarvisDefaults {
-    static var accent: JarvisAccentColor {
+struct RelayDefaults {
+    static var accent: RelayAccentColor {
         get {
-            guard let raw = UserDefaults.standard.string(forKey: "jarvis.accent"),
-                  let value = JarvisAccentColor(rawValue: raw) else { return .blue }
+            guard let raw = UserDefaults.standard.string(forKey: "relay.accent"),
+                  let value = RelayAccentColor(rawValue: raw) else { return .blue }
             return value
         }
-        set { UserDefaults.standard.set(newValue.rawValue, forKey: "jarvis.accent") }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "relay.accent") }
     }
     
-    static var appearance: JarvisAppearance {
+    static var appearance: RelayAppearance {
         get {
-            guard let raw = UserDefaults.standard.string(forKey: "jarvis.appearance"),
-                  let value = JarvisAppearance(rawValue: raw) else { return .system }
+            guard let raw = UserDefaults.standard.string(forKey: "relay.appearance"),
+                  let value = RelayAppearance(rawValue: raw) else { return .system }
             return value
         }
-        set { UserDefaults.standard.set(newValue.rawValue, forKey: "jarvis.appearance") }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "relay.appearance") }
+    }
+    
+    static var motion: MotionPreference {
+        get {
+            guard let raw = UserDefaults.standard.string(forKey: "relay.motion"),
+                  let value = MotionPreference(rawValue: raw) else { return .standard }
+            return value
+        }
+        set { UserDefaults.standard.set(newValue.rawValue, forKey: "relay.motion") }
+    }
+    
+    static var reduceTransparency: Bool {
+        get { UserDefaults.standard.bool(forKey: "relay.reduceTransparency") }
+        set { UserDefaults.standard.set(newValue, forKey: "relay.reduceTransparency") }
     }
 }
 
 /// Color 扩展：NSColor 桥接（用于持久化）
 extension Color {
-    func toNSColor() -> NSColor { NSColor(self) }
+    func toNSColor() -> NSColor? {
+        let nsColor = NSColor(self)
+        return nsColor
+    }
 }
 
-struct JarvisTheme_Previews: PreviewProvider {
+struct RelayTheme_Previews: PreviewProvider {
     static var previews: some View {
         Text("Theme")
     }

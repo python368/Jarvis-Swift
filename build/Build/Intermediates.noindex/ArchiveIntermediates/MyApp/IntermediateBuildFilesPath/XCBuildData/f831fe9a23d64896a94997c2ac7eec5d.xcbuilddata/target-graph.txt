@@ -1,0 +1,2 @@
+Target dependency graph (1 target)
+Target 'MyApp' in project 'Jarvis swift' (no dependencies)

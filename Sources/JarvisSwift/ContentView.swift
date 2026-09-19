@@ -1,12 +1,12 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject private var theme = JarvisTheme()
+    @StateObject private var theme = RelayTheme()
     @StateObject private var memoryStore = MemoryStore.shared
     @StateObject private var providerManager = ProviderManager()
     @StateObject private var searchManager = SearchManager()
     @StateObject private var automation = AutomationLayer()
-    @StateObject private var agentEngine = AgentEngine(
+    @StateObject private var agentEngine = RelayAgentEngine(
         memoryStore: MemoryStore.shared,
         providerManager: ProviderManager(),
         searchManager: SearchManager(),
@@ -53,7 +53,7 @@ struct ContentView: View {
                     )
                     
                     // 底部输入栏
-                    JarvisComposer(
+                    RelayComposer(
                         text: $inputText,
                         onSend: sendMessage,
                         accentColor: theme.semanticColors.accent,
@@ -80,16 +80,16 @@ struct ContentView: View {
                 }
             }
             .sheet(isPresented: $showSettings) {
-                JarvisSettingsView(theme: theme, memoryStore: memoryStore, providerManager: providerManager, searchManager: searchManager)
+                RelaySettingsView(theme: theme, memoryStore: memoryStore, providerManager: providerManager, searchManager: searchManager)
             }
             .sheet(isPresented: $showProviderSheet) {
-                ProviderConfigView(providerManager: providerManager)
+                RelayProviderConfigView(providerManager: providerManager)
             }
             .sheet(isPresented: $showSearchSheet) {
-                SearchConfigView(searchManager: searchManager)
+                RelaySearchConfigView(searchManager: searchManager)
             }
             .sheet(isPresented: $showAgentPanel) {
-                AgentPanelView(agentEngine: agentEngine, goal: $agentGoal)
+                RelayAgentPanelView(agentEngine: agentEngine, goal: $agentGoal)
             }
         }
         .frame(minWidth: 520, minHeight: 400)
@@ -110,10 +110,10 @@ struct ContentView: View {
         Task {
             try? await Task.sleep(nanoseconds: 400_000_000)
             let reply = "好的，我正在处理：「\(text)」。"
-            let jarvisMessage = Message(id: UUID(), text: reply, isUser: false)
+            let relayMessage = Message(id: UUID(), text: reply, isUser: false)
             withAnimation(theme.animationConfig.stateChange) {
-                messages.append(jarvisMessage)
-                memoryStore.addMessage(jarvisMessage)
+                messages.append(relayMessage)
+                memoryStore.addMessage(relayMessage)
             }
         }
     }
@@ -123,7 +123,7 @@ struct ContentView: View {
 
 /// 呼吸背景动画（Layer 3 环境动画）
 struct BreathingBackground: View {
-    @ObservedObject var theme: JarvisTheme
+    @ObservedObject var theme: RelayTheme
     @State private var phase: CGFloat = 0
     
     var body: some View {
@@ -147,7 +147,7 @@ struct BreathingBackground: View {
 
 /// 顶部状态栏
 struct TopStatusBar: View {
-    @ObservedObject var theme: JarvisTheme
+    @ObservedObject var theme: RelayTheme
     let agentState: AgentState
     let provider: ProviderConfig?
     let memoryCount: Int
@@ -159,11 +159,11 @@ struct TopStatusBar: View {
         HStack(spacing: 16) {
             // Logo / 标题
             HStack(spacing: 8) {
-                Image(systemName: "brain.head.profile")
+                Image(systemName: "arrow.uturn.forward")
                     .font(.title2)
                     .foregroundStyle(theme.semanticColors.accent)
                     .symbolEffect(.pulse, options: .repeating, value: theme.animationConfig.motion != .reduced)
-                Text("Jarvis")
+                Text("Relay")
                     .font(.title2.weight(.semibold))
                     .foregroundStyle(theme.semanticColors.primaryText)
             }
@@ -223,7 +223,7 @@ struct TopStatusBar: View {
 /// Agent 状态指示器
 struct AgentStateIndicator: View {
     let state: AgentState
-    @ObservedObject var theme: JarvisTheme
+    @ObservedObject var theme: RelayTheme
     
     var body: some View {
         HStack(spacing: 6) {
@@ -282,14 +282,17 @@ struct AgentStateIndicator: View {
         case .failed: return "失败"
         }
     }
+    
+    @State private var pulseScale: CGFloat = 1
+    @State private var pulseOpacity: Double = 1
 }
 
 /// 聊天视图
 struct ChatView: View {
     @Binding var messages: [Message]
-    @ObservedObject var theme: JarvisTheme
+    @ObservedObject var theme: RelayTheme
     let memoryStore: MemoryStore
-    let agentEngine: AgentEngine
+    let agentEngine: RelayAgentEngine
     
     var body: some View {
         ScrollViewReader { proxy in
@@ -325,11 +328,11 @@ struct ChatView: View {
 
 /// 空状态视图
 struct EmptyStateView: View {
-    @ObservedObject var theme: JarvisTheme
+    @ObservedObject var theme: RelayTheme
     
     var body: some View {
         VStack(spacing: 24) {
-            Image(systemName: "brain.head.profile")
+            Image(systemName: "arrow.uturn.forward")
                 .font(.system(size: 64))
                 .foregroundStyle(
                     LinearGradient(colors: [theme.semanticColors.accent, theme.semanticColors.accent.opacity(0.5)], startPoint: .topLeading, endPoint: .bottomTrailing)
@@ -337,7 +340,7 @@ struct EmptyStateView: View {
                 .symbolEffect(.pulse, options: .repeating, value: theme.animationConfig.motion != .reduced)
             
             VStack(spacing: 8) {
-                Text("你好，我是 Jarvis")
+                Text("你好，我是 Relay")
                     .font(.title.weight(.medium))
                     .foregroundStyle(theme.semanticColors.primaryText)
                 Text("告诉我你的目标，剩下的交给我")
@@ -359,7 +362,7 @@ struct EmptyStateView: View {
 
 struct ExampleChip: View {
     let text: String
-    @ObservedObject var theme: JarvisTheme
+    @ObservedObject var theme: RelayTheme
     
     var body: some View {
         Text(text)
@@ -376,8 +379,8 @@ struct ExampleChip: View {
 }
 
 /// Agent 面板
-struct AgentPanelView: View {
-    @ObservedObject var agentEngine: AgentEngine
+struct RelayAgentPanelView: View {
+    @ObservedObject var agentEngine: RelayAgentEngine
     @Binding var goal: String
     @Environment(\.dismiss) var dismiss
     @State private var isRunning = false
@@ -392,7 +395,7 @@ struct AgentPanelView: View {
                 Text("Agent 任务")
                     .font(.title2.weight(.semibold))
                 
-                Text("描述你的目标，Jarvis 将自动规划并执行")
+                Text("描述你的目标，Relay 将自动规划并执行")
                     .font(.body)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)

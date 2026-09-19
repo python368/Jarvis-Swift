@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct JarvisComposer: View {
+struct RelayComposer: View {
     @Binding var text: String
     let onSend: () -> Void
     var accentColor: Color
@@ -8,13 +8,13 @@ struct JarvisComposer: View {
     @Environment(\.colorScheme) var colorScheme
     
     @State private var isHovering = false
-    @State private var isFocused = false
+    @FocusState private var isFocused: Bool
     
     var body: some View {
         HStack(spacing: 12) {
             // 输入框
             ZStack(alignment: .trailing) {
-                TextField("告诉 Jarvis 你的目标…", text: $text, axis: .vertical)
+                TextField("告诉 Relay 你的目标…", text: $text, axis: .vertical)
                     .textFieldStyle(ComposerTextFieldStyle(
                         isFocused: $isFocused,
                         isHovering: $isHovering,
@@ -92,7 +92,7 @@ struct ComposerThemeColors {
 }
 
 struct ComposerTextFieldStyle: TextFieldStyle {
-    @Binding var isFocused: Bool
+    var isFocused: FocusState<Bool>.Binding
     @Binding var isHovering: Bool
     let themeColors: ComposerThemeColors
     
@@ -107,13 +107,13 @@ struct ComposerTextFieldStyle: TextFieldStyle {
                     .fill(themeColors.background)
                     .overlay(
                         RoundedRectangle(cornerRadius: 14, style: .continuous)
-                            .stroke(isFocused ? themeColors.focusRing : (isHovering ? themeColors.border.opacity(0.5) : themeColors.border), lineWidth: isFocused ? 2 : 1)
+                            .stroke(isFocused.wrappedValue ? themeColors.focusRing : (isHovering ? themeColors.border.opacity(0.5) : themeColors.border), lineWidth: isFocused.wrappedValue ? 2 : 1)
                     )
             )
             .onHover { hovering in
                 withAnimation(.easeInOut(duration: 0.15)) { isHovering = hovering }
             }
-            .focused($isFocused)
+            .focused(isFocused)
             .textSelection(.enabled)
     }
 }
@@ -126,8 +126,10 @@ struct ComposerBackground: View {
     var body: some View {
         UnevenRoundedRectangle(
             cornerRadii: RectangleCornerRadii(
-                topLeading: 20, topTrailing: 20,
-                bottomLeading: 20, bottomTrailing: 20
+                topLeading: 20,
+                topTrailing: 20,
+                bottomLeading: 20,
+                bottomTrailing: 20
             )
         )
         .fill(
@@ -142,8 +144,10 @@ struct ComposerBackground: View {
         .overlay(
             UnevenRoundedRectangle(
                 cornerRadii: RectangleCornerRadii(
-                    topLeading: 20, topTrailing: 20,
-                    bottomLeading: 20, bottomTrailing: 20
+                    topLeading: 20,
+                    topTrailing: 20,
+                    bottomLeading: 20,
+                    bottomTrailing: 20
                 )
             )
             .stroke(
@@ -168,19 +172,18 @@ struct ComposerButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .scaleEffect(configuration.isPressed ? pressScale : (configuration.isHovered ? hoverScale : 1.0))
+            .scaleEffect(configuration.isPressed ? pressScale : hoverScale)
             .animation(.spring(response: 0.12, dampingFraction: 0.7), value: configuration.isPressed)
-            .animation(.spring(response: 0.2, dampingFraction: 0.8), value: configuration.isHovered)
     }
 }
 
 // Preview
-struct JarvisComposer_Previews: PreviewProvider {
+struct RelayComposer_Previews: PreviewProvider {
     static var previews: some View {
         @State var text = ""
         VStack {
-            JarvisComposer(text: $text, onSend: {}, accentColor: .blue, isProcessing: false)
-            JarvisComposer(text: $text, onSend: {}, accentColor: .purple, isProcessing: true)
+            RelayComposer(text: $text, onSend: {}, accentColor: .blue, isProcessing: false)
+            RelayComposer(text: $text, onSend: {}, accentColor: .purple, isProcessing: true)
         }
         .padding()
         .frame(width: 500)

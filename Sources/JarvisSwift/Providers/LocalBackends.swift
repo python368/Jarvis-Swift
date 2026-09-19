@@ -21,8 +21,8 @@ class LocalBackend: ModelBackend {
         URL(string: config.baseURL)
     }
     
-    /// 构建带路径的 URL
-    private func makeURL(path: String) -> URL? {
+/// 构建带路径的 URL
+    fileprivate func makeURL(path: String) -> URL? {
         guard let base = baseURL else { return nil }
         return base.appendingPathComponent(path)
     }

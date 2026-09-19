@@ -2,21 +2,21 @@
 import PackageDescription
 
 let package = Package(
-    name: "JarvisSwift",
+    name: "Relay",
     platforms: [
         .macOS(.v13)
     ],
     products: [
         .executable(
-            name: "JarvisSwift",
-            targets: ["JarvisSwift"])
+            name: "Relay",
+            targets: ["Relay"])
     ],
     targets: [
         .target(
-            name: "JarvisSwift",
+            name: "Relay",
             dependencies: []),
         .testTarget(
-            name: "JarvisSwiftTests",
-            dependencies: ["JarvisSwift"])
+            name: "RelayTests",
+            dependencies: ["Relay"])
     ]
 )

@@ -1,7 +1,7 @@
 import SwiftUI
 
 /// Provider 配置视图
-struct ProviderConfigView: View {
+struct RelayProviderConfigView: View {
     @ObservedObject var providerManager: ProviderManager
     @Environment(\.dismiss) var dismiss
     @State private var showingAddProvider = false

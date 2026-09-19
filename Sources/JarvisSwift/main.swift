@@ -1,7 +1,7 @@
 import SwiftUI
 
 @main
-struct JarvisSwiftApp: App {
+struct RelayApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()

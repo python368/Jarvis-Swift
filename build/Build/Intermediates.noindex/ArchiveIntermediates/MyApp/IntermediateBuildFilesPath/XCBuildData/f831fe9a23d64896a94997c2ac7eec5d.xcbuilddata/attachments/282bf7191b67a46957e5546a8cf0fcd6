@@ -1,0 +1,116 @@
+{
+  "" : {
+    "const-values" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MyApp-primary.swiftconstvalues",
+    "dependencies" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MyApp-primary.d",
+    "diagnostics" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MyApp-primary.dia",
+    "emit-module-dependencies" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MyApp-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MyApp-primary-emit-module.dia",
+    "pch" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MyApp-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MyApp-primary.swiftdeps"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Package.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/Package.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/Package.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/Package.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Agent/AgentEngine.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/AgentEngine.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/AgentEngine.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/AgentEngine.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Automation/AutomationLayer.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/AutomationLayer.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/AutomationLayer.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/AutomationLayer.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/ContentView.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/ContentView.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/ContentView.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/ContentView.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/JarvisComposer.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/JarvisComposer.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/JarvisComposer.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/JarvisComposer.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/JarvisSettingsView.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/JarvisSettingsView.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/JarvisSettingsView.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/JarvisSettingsView.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/JarvisTheme.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/JarvisTheme.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/JarvisTheme.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/JarvisTheme.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Memory/MemoryExportDocument.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MemoryExportDocument.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MemoryExportDocument.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MemoryExportDocument.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Memory/MemoryModels.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MemoryModels.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MemoryModels.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MemoryModels.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Memory/MemoryStore.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MemoryStore.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MemoryStore.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MemoryStore.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Memory/RetrievalIndex.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/RetrievalIndex.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/RetrievalIndex.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/RetrievalIndex.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Message.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/Message.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/Message.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/Message.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/MessageBubble.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MessageBubble.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MessageBubble.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/MessageBubble.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Providers/CloudBackends.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/CloudBackends.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/CloudBackends.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/CloudBackends.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Providers/LocalBackends.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/LocalBackends.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/LocalBackends.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/LocalBackends.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Providers/ModelBackend.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/ModelBackend.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/ModelBackend.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/ModelBackend.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Providers/ProviderConfigView.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/ProviderConfigView.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/ProviderConfigView.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/ProviderConfigView.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Search/SearchBackends.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/SearchBackends.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/SearchBackends.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/SearchBackends.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Search/SearchConfigView.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/SearchConfigView.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/SearchConfigView.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/SearchConfigView.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/Search/SearchProvider.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/SearchProvider.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/SearchProvider.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/SearchProvider.o"
+  },
+  "/Users/kangning/Desktop/Jarvis swift/Sources/JarvisSwift/main.swift" : {
+    "index-unit-output-path" : "/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/main.o",
+    "llvm-bc" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/main.bc",
+    "object" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath/Jarvis swift.build/Release-iphoneos/MyApp.build/Objects-normal/arm64/main.o"
+  }
+}

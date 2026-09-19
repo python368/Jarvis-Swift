@@ -35,7 +35,7 @@ final class MemoryStore: ObservableObject {
         let support = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first
             ?? FileManager.default.temporaryDirectory
         return support
-            .appendingPathComponent("Jarvis", isDirectory: true)
+            .appendingPathComponent("Relay", isDirectory: true)
             .appendingPathComponent("MemoryStore.json")
     }
     

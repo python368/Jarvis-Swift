@@ -1,0 +1,88 @@
+{
+  "buildCommand" : {
+    "command" : "build",
+    "skipDependencies" : false,
+    "style" : "buildAndRun"
+  },
+  "configuredTargets" : [
+    {
+      "guid" : "1bc72803b1e0d9469e912b7842e6fcac341184bd36c33c60bd08e297950cef23"
+    }
+  ],
+  "containerPath" : "/Users/kangning/Desktop/Jarvis swift/Jarvis swift.xcodeproj",
+  "continueBuildingAfterErrors" : false,
+  "dependencyScope" : "workspace",
+  "enableIndexBuildArena" : false,
+  "hideShellScriptEnvironment" : false,
+  "parameters" : {
+    "action" : "install",
+    "activeArchitecture" : "undefined_arch",
+    "activeRunDestination" : {
+      "disableOnlyActiveArch" : true,
+      "hostTargetedPlatform" : null,
+      "platform" : "iphoneos",
+      "sdk" : "iphoneos27.0",
+      "sdkVariant" : "iphoneos",
+      "supportedArchitectures" : [
+        "armv4t",
+        "armv5",
+        "armv6",
+        "armv7",
+        "armv7f",
+        "armv7s",
+        "armv7k",
+        "arm64",
+        "arm64e"
+      ],
+      "targetArchitecture" : "undefined_arch"
+    },
+    "arenaInfo" : {
+      "buildIntermediatesPath" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex",
+      "buildProductsPath" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Products",
+      "derivedDataPath" : "/Users/kangning/Desktop/Jarvis swift/build",
+      "indexDataStoreFolderPath" : "/Users/kangning/Desktop/Jarvis swift/build/Index.noindex/DataStore",
+      "indexEnableDataStore" : true,
+      "indexPCHPath" : "/Users/kangning/Desktop/Jarvis swift/build/Index.noindex/PrecompiledHeaders",
+      "pchPath" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/PrecompiledHeaders"
+    },
+    "configurationName" : "Release",
+    "overrides" : {
+      "commandLine" : {
+        "table" : {
+
+        }
+      },
+      "synthesized" : {
+        "table" : {
+          "ACTION" : "install",
+          "ASSET_PACK_FOLDER_PATH" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/InstallationBuildProductsLocation/OnDemandResources",
+          "ASSETCATALOG_COMPILER_FLATTENED_APP_ICON_PATH" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/BuildProductsPath/ProductIcon.png",
+          "DEPLOYMENT_LOCATION" : "YES",
+          "DEPLOYMENT_POSTPROCESSING" : "YES",
+          "DSTROOT" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/InstallationBuildProductsLocation",
+          "EMBED_ASSET_PACKS_IN_PRODUCT_BUNDLE" : "NO",
+          "ENABLE_PREVIEWS" : "NO",
+          "ENABLE_SIGNATURE_AGGREGATION" : "YES",
+          "ENABLE_XOJIT_PREVIEWS" : "YES",
+          "INDEX_ENABLE_DATA_STORE" : "NO",
+          "MESSAGES_APPLICATION_EXTENSION_SUPPORT_FOLDER_PATH" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/BuildProductsPath/MessagesApplicationExtensionSupport",
+          "MESSAGES_APPLICATION_SUPPORT_FOLDER_PATH" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/BuildProductsPath/MessagesApplicationSupport",
+          "OBJROOT" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/IntermediateBuildFilesPath",
+          "ONLY_ACTIVE_ARCH" : "YES",
+          "SHARED_PRECOMPS_DIR" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/PrecompiledHeaders",
+          "SIGNATURE_METADATA_FOLDER_PATH" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/BuildProductsPath/Signatures",
+          "SWIFT_STDLIB_TOOL_UNSIGNED_DESTINATION_DIR" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/BuildProductsPath/SwiftSupport",
+          "SYMROOT" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/BuildProductsPath",
+          "TOOLCHAINS" : "com.apple.dt.toolchain.Metal.32023.917.2 $(inherited)",
+          "WATCHKIT_2_SUPPORT_FOLDER_PATH" : "/Users/kangning/Desktop/Jarvis swift/build/Build/Intermediates.noindex/ArchiveIntermediates/MyApp/BuildProductsPath/WatchKitSupport2"
+        }
+      }
+    }
+  },
+  "schemeCommand" : "archive",
+  "showNonLoggedProgress" : true,
+  "useDryRun" : false,
+  "useImplicitDependencies" : true,
+  "useLegacyBuildLocations" : false,
+  "useParallelTargets" : true
+}
